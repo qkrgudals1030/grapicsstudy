@@ -22,6 +22,8 @@
 
 ##[실습1] 펜 만들기
 
+ '''    
+ ~~~
  void setup(){
   size(500,500);
   stroke(0,255,0);
@@ -31,6 +33,7 @@ void draw(){
   if(mousePressed)
     line(pmouseX,pmouseY,mouseX,mouseY);
 }
+~~~
 
 > ##[실습2] 공이 하늘에서 아래로 내려오기
 
