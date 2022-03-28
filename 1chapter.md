@@ -83,6 +83,34 @@ void draw() {
 }
 ~~~
 
+## [추가] p5.js 에서 printf
+'''
+~~~
+function setup() {
+createCanvas(400, 400);
+}
+
+function draw() {
+background(255,255,0);
+console.log(`Frame rate is ${frameRate()}`);
+}
+~~~
+
+## [추가] p5.js(웹 브라우저에서 만들기)
+'''
+~~~
+function setup() {
+  createCanvas(displayWidth, displayHeight);
+  strokeWeight(10);
+  stroke(0);
+}
+
+function touchMoved() {
+  line(mouseX, mouseY, pmouseX, pmouseY);
+  return false;
+}
+~~~
+
 
 
 
