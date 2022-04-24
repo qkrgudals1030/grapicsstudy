@@ -1,0 +1,105 @@
+□ 수업목표
+
+○ DOM(Button, Input)를 활용하여 그래픽스에 응용할 수 있다.
+
+○ 지형생성과 관련된 논문을 작성할 수 있다.
+
+○ class와 object를 활용할 수 있다.
+
+​
+
+□ 멋진 참고 자료 입니다. 
+
+○ https://wikidocs.net/book/5373
+
+​
+
+□ 복습
+
+▷ 지형의 변경 p5js terrain
+
+​
+
+□ DOM (Button, Input)
+
+▷ Button
+
+let b;
+function setup() {
+  b = createButton("click me");
+  b.mousePressed(fn);
+}
+
+function fn() {
+  let val = random(0,100);
+  background(128);
+  ellipse(50,50,val,val);
+}
+▷ Input
+
+function setup() {
+  let inp = createInput('');
+  inp.size(100);
+  inp.input(fn);
+}
+function fn() {
+  console.log(this.value());
+}
+▷ Input & Button
+
+let i, b;
+function setup() {
+  i = createInput();
+  b = createButton('Draw');
+  b.mousePressed(fn);
+}
+function fn() {
+  let a = i.value();  
+  ellipse(50,50,a,a);
+}
+□ createGraphics
+
+https://p5js.org/examples/structure-create-graphics.html
+□  orbitControl() 
+
+function setup() {
+  createCanvas(500, 500, WEBGL);
+  normalMaterial();
+}
+function draw() {
+  background(200);
+  orbitControl();
+  rotateY(0.5);
+  box(130, 150);
+}
+□ Object https://p5js.org/examples/objects-objects.html
+
+let b = []; // Declare object
+let i, sz = 50;
+function setup() {
+  createCanvas(710, 400);
+  for(i=0;i<sz;i++) b[i] = new Ball();   
+}
+
+function draw() {
+  background(50, 89, 100);
+  for(i=0;i<sz;i++){
+    b[i].move();
+    b[i].display();
+  }
+}
+class Ball {
+  constructor() {
+    this.x = random(width);
+    this.y = random(height);
+    this.diameter = random(5, 40);
+    this.speed = 2;
+  }
+  move() {
+    this.x += random(-this.speed, this.speed);
+    this.y += random(-this.speed, this.speed);
+  }
+  display() {
+    ellipse(this.x, this.y, this.diameter, this.diameter);
+  }
+}
