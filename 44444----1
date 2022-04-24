@@ -1,0 +1,118 @@
+function setup() {
+createCanvas(500, 500);
+fill(255,0,0);
+rect(0, 0, 260, 50);
+text('Dogs - 260', 0, 75);
+fill(0,255,0);
+rect(0, 100, 300, 50);
+text('Cats - 300', 0, 175);
+fill(0,0,255);
+rect(0, 200, 100, 50);
+text('Hamsters - 100', 0, 275);
+fill(200,100,0);
+rect(0, 300, 50, 50);
+text('Rabbits - 50', 0, 375);
+fill(0,200,200);
+rect(0, 400, 10, 50);
+text('Spiders - 10', 0, 475);
+}
+
+2022.03.21. 12:12 답글쓰기
+프로필 사진
+심재창
+fill(terrain[x][y]+100,0, terrain[x][y]+100);
+vertex(x * scl, y * scl, terrain[x][y]);
+vertex(x * scl, (y + 1) * scl, terrain[x][y + 1]);
+
+2022.03.21. 14:45 답글쓰기
+프로필 사진
+심재창
+beginShape(TRIANGLE_STRIP);
+for (var x = 0; x < cols; x++) {
+let v = map(terrain[x][y],-100,100,0,255);
+fill(0,v,0, 128);
+vertex(x * scl, y * scl, terrain[x][y]);
+vertex(x * scl, (y + 1) * scl, terrain[x][y + 1]);
+}
+endShape();
+
+2022.03.21. 14:55 답글쓰기
+프로필 사진
+심재창
+https://youtu.be/f-9LEoYYvE4?t=4 <- WEBGL
+
+2022.03.24. 13:28 답글쓰기
+프로필 사진
+심재창
+p5js에서의 학습
+1. https://p5js.org/ > Examples >3D > Geometries
+2. >Learn >(스크롤하여) 3D/WebGL
+https://github.com/processing/p5.js/wiki/Getting-started-with-WebGL-in-p5
+
+2022.03.24. 14:02 답글쓰기
+프로필 사진
+심재창
+// Daniel Shiffman
+// http://codingtra.in
+// https://youtu.be/IKB1hWWedMk
+// https://thecodingtrain.com/CodingChallenges/011-perlinnoiseterrain.html
+
+// Edited by SacrificeProductions
+
+var cols, rows;
+var scl = 20;
+var w = 1400;
+var h = 1000;
+
+var flying = 0;
+
+var terrain = [];
+function setup() {
+createCanvas(600, 600, WEBGL);
+cols = w / scl;
+rows = h / scl;
+
+for (var x = 0; x < cols; x++) {
+terrain[x] = [];
+for (var y = 0; y < rows; y++) {
+terrain[x][y] = 0; //specify a default value for now
+}
+}
+noStroke();
+}
+
+function draw() {
+flying -= 0.01;
+var yoff = flying;
+for (var y = 0; y < rows; y++) {
+var xoff = 0;
+for (var x = 0; x < cols; x++) {
+terrain[x][y] = map(noise(xoff, yoff), 0, 1, -100, 100);
+xoff += 0.5;
+}
+yoff += 0.2;
+}
+background(0);
+translate(0, 50);
+rotateX(PI / 3);
+// fill(200, 200, 200);
+translate(-w / 2, -h / 2);
+for (var y = 0; y < rows - 1; y++) {
+beginShape(TRIANGLE_STRIP);
+for (var x = 0; x < cols; x++) {
+let v = terrain[x][y];
+v = map(v, -100,100,0,255);
+fill(v-64,v-32,v);
+vertex(x * scl, y * scl, terrain[x][y]);
+vertex(x * scl, (y + 1) * scl, terrain[x][y + 1]);
+}
+endShape();
+}
+translate(w / 2, h / 2);
+translate(mouseX-width/2, (mouseY-height/2)*6);
+rotate(PI/5);
+push();
+normalMaterial();
+sphere(100);
+pop();
+}
