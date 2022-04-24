@@ -1,0 +1,115 @@
+[학습 목표]
+
+○ JavaScript로 웹에서 초록색의 4픽셀로 된 마우스 펜을 만들 수 있다.
+
+○ 인터넷의 영상을 화면에 출력하고 회전할 수 있다.
+
+○ beginShape()과 endShape()으로 삼각형, 사각형, 오각형 및 6각형의 도형을 작성할 수 있다.
+
+○ vertex로 도형을 그릴 수 있다.
+
+○ 브라우저에서 WEBGL로 육면체 출력하고 마우스로 회전할 수 있다.
+
+○ noise() 를 활용하여 지형을 생성할 수 있다.
+
+​
+
+[학습내용]
+
+​
+
+□ Processing vs p5.js
+
+- 다른 점
+
+void setup() => function setup()
+size() => createCanvas()
+mousePressed => mouseIsPressed()
+int a => var a
+- p5.js 로 펜을 구현하자.
+
+function setup() {
+  createCanvas(400, 400);
+}
+function draw() {
+  if (mouseIsPressed)    fill(0);
+  else   fill(255);
+  ellipse(mouseX, mouseY, 80, 80);
+}
+▷ P3D와 WEBGL
+
+- Processing = Java + OpenGL(P3D), PC에서 작동된다.
+
+- p5.js = Java + OpenGL (WEBGL), 브라우저에서 작동된다. 
+
+​
+
+▷ What is Java Script?
+
+- Web development에서 가장 많이 쓰인다.
+
+- PC와 스마트폰에서 작동된다.
+
+- OS와 관계없이 작동된다(리눅스, 윈도우, iOS 등)
+
+​
+
+□ 영상의 출력
+
+▷ 영상 화면에 출력하기 (변수)
+
+let img;
+function preload() {
+  img = loadImage("jcshim.jpg"); // 내 스케치 폴더에 jcshim.jpg가 있어야 한다.
+}
+function setup() {
+  createCanvas(400,400);
+  image(img, 0, 0);
+}
+▷ WEBGL로  Box()를 화면에 출력하기
+
+​
+
+□ vertex(), beginShape(), noise()
+
+▷ vertex()
+
+▷ beginShape():
+
+▷ noise();
+
+​
+
+□ 지형의 생성
+
+▷ 2D Array in Java Script: https://p5js.org/examples/arrays-array-2d.html
+
+▷ 유튜브 강의: https://youtu.be/IKB1hWWedMk
+
+▷ 3D Terrain Generation: https://editor.p5js.org/codingtrain/sketches/OPYPc4ueq
+
+​
+
+[리포트]
+
+3차원 지형을 만들고,  마우스 이동에 따라 원이 움직이도록 하시오.
+
+​
+
+[실습] 다음 그래프를 만들어 보시오. [rect(), text()]
+
+
+□ WEBGL,  mouseIsPressed, box, normalMaterial
+
+function setup() {
+  createCanvas(windowWidth, windowHeight,WEBGL);
+}
+function draw() {
+  if (mouseIsPressed){
+    fill(0,255,0);
+    stroke(0);
+  }
+  else   normalMaterial();
+  translate(mouseX-width/2, mouseY-height/2);
+  box(50);
+}
