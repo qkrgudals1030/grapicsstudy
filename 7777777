@@ -1,0 +1,54 @@
+수업목표]
+
+○ preload()로 영상을 읽어오고 image()로 출력할 수 있다.
+
+○ 영상을 다운받고, p5js 에 업로드 하여 활용할 수 있다.
+
+○ Callback을 활용하여 영상을 읽을 수 있다.
+
+○ 필터 INVERT를 활용하여 영상을 반전할 수 있다.
+
+○ 픽셀 단위의 영상을 반전처리 할 수 있다.
+
+​
+
+□ graphics 실습
+
+let txt;
+function setup() {
+  createCanvas(800,600,WEBGL);
+
+  txt = createGraphics(800,600);
+  txt.textAlign(CENTER);
+  txt.textSize(133);
+  txt.text('I love ANU', 400,300);
+}
+
+function draw() {
+  background(170);
+  rotateX(map(mouseX, 0, width, 0, 3));
+  rotateY(map(mouseY, 0, width, 0, 3));
+  texture(txt);
+  box(width/4);
+}
+ □ 영상읽기
+
+let img;
+let url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/481px-Cat03.jpg';
+function preload() {
+  img = loadImage(url);
+}
+function setup() {
+  createCanvas(img.width, img.height);
+  image(img, 0, 0);
+}
+// callback & filter
+let img; 
+let url = 'moonwalk.jpg';
+function setup() {
+  createCanvas(720, 400);
+  loadImage('moonwalk.jpg', img => {
+    image(img, 0,0);
+    filter(INVERT);
+  }); 
+}
