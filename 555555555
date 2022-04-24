@@ -1,0 +1,197 @@
+[수업목표]
+
+○ p5js에서 Slider를 활용할 수 있다.
+
+객체 배열을 활용하여 작품을 만들 수 있다.
+
+○ 3D 도형을 출력하고 영상으로 텍스쳐 매핑을 할 수 있다.
+
+○ Light와 Camera 및 Metarial 을 활용하여 3차원 도형을 표현할 수 있다.
+
+○ 과학기술 논문을 검색하고 작성할 수 있다.
+
+​
+
+[복습]
+
+▷ https://editor.p5js.org/mrm029/sketches/BJMVVsHJN (함수, arc)
+
+
+▷ Slider를 활용하여 눈의 크기 및 위치를 변경하시오. 
+
+let s;
+function setup() {
+  s = createSlider(0, 255, 127);
+}
+function draw() {
+  let v= s.value();
+  background(v);
+}
+// https://p5js.org/reference/#/p5/createSlider
+- [createSlider: p5.js Example>Hello P5>ex03_interactivity]
+
+- HScroller 를 직접 만들어 보기 : https://editor.p5js.org/REAS/sketches/B1_KaBccg
+
+- 댓글에 답이 있습니다.
+
+[수업실습1] box, normalMaterial, Camera: pan, rotateX
+
+let cam;
+let d = 0.01;
+function setup() {
+  createCanvas(100, 100, WEBGL);
+  normalMaterial();
+  cam = createCamera();
+  cam.pan(-0.8); // set initial pan angle
+}
+function draw() {
+  background(200);
+  cam.pan(d);
+  // every 70 fames, switch direction
+  if (frameCount % 70 === 0) d *= -1;
+  rotateX(frameCount * 0.01);
+  translate(20, 0, 0);
+  box(40);
+}
+[수업실습2] camera, directionalLight, ambentLight, perspective, angleMode
+
+function setup() {
+  createCanvas(windowWidth, windowHeight, WEBGL);
+  //normalMaterial();
+  //ortho();
+  //perspective();
+  //angleMode(RADIANS); 
+  //angleMode(DEGREES);
+}
+let d=100
+function draw(){
+  background(128);
+  //translate(mouseX-width/2, mouseY-height/2);
+  //rotate(45);
+  //rotateX(45);
+  //rotateY(45);
+  //rotateZ(45);
+  camera(d,d,d);
+  directionalLight(0, 250, 0, -1, 0, -1);
+  ambientLight(100); // white light
+  //ambientMaterial(255, 102, 94); // magenta material
+  //let locX = mouseX - width / 2;
+  //let locY = mouseY - height / 2;
+  //spotLight(0, 250, 0, locX, locY, 100, 0, 0, -1, Math.PI / 16);
+  box(100, 100);
+}
+[수업내용]
+
+□  Arrays of Object
+
+▷ https://p5js.org/examples/objects-array-of-objects.html
+
+▷ https://youtu.be/i2C1hrJMwz0
+
+​
+
+□ WEBGL
+
+▷ https://github.com/processing/p5.js/wiki/Getting-started-with-WebGL-in-p5
+
+​
+
+□ 3D
+
+▷ https://p5js.org/examples/3d-geometries.html
+
+▷ https://p5js.org/examples/form-3d-primitives.html
+
+▷ https://p5js.org/examples/3d-textures.html
+
+- preload() - video - image
+
+​
+
+□ Lights https://processing.org/examples/spot.html
+
+▷ ambientLight()  ▷ specularColor() ▷ directionalLight() ▷ pointLight()
+
+▷ lights() ▷ lightFalloff() ▷ spotLight() ▷ noLights()
+
+▷ https://p5js.org/examples/lights-directional.html
+
+▷ https://p5js.org/examples/lights-mixture.html
+
+​
+
+□ Camera
+
+▷ https://p5js.org/reference/#/p5/camera
+
+▷ camera() ▷ perspective() ▷ ortho() ▷ frustum() ▷ createCamera()
+
+▷ p5.Camera ▷ setCamera()
+
+​
+
+[실습예제]
+
+○ 3차원 지형에 Light와 Camera 및 Metarial 기능을 포함해 보시오.
+
+​
+
+[논문작성]
+
+○ https://github.com/jcshim/paper
+
+​
+
+프로필 사진심재창님의 게시글 더보기 
+좋아요0
+이 글을 '좋아요'한 멤버 리스트 댓글2
+ 공유
+신고
+댓글
+등록순최신순새로고침
+댓글알림
+등록
+프로필 사진
+심재창
+== 대충 같을 때 1 =="1" ok
+=== 형태까지 같을 때 1 === "1" No!!
+
+2022.03.24. 10:17 답글쓰기
+프로필 사진
+심재창
+슬라이더를 활용하여 스마일의 크기와 눈의 크기를 조정해 보시오.
+
+let a, b;
+function setup() {
+createCanvas(400, 400);
+a = createSlider(0,300, 170);
+a.position(10,10);
+b = createSlider(0,a/2, a/4);
+b.position(10,40);
+}
+
+function draw() {
+background(220);
+happyFace(width/2, height/2, a.value());
+}
+
+function happyFace (x, y, diam) {
+// Face
+fill(255, 255, 0);
+stroke(0);
+strokeWeight(2);
+ellipse(x, y, diam, diam);
+
+// Smile
+var startAng = .1*PI
+var endAng = .9*PI
+var smileDiam = .6*diam;
+arc(x, y, smileDiam, smileDiam, startAng, endAng);
+
+// Eyes
+var offset = .2*diam;
+var eyeDiam = .1*diam;
+fill(0);
+ellipse(x-offset, y-offset, b.value(), b.value());
+ellipse(x+offset, y-offset, eyeDiam, eyeDiam);
+}
